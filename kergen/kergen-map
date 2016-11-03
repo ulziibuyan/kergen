@@ -176,7 +176,7 @@ def generate_file_system_kernel_options():
     if os.path.isfile('/proc/mounts'):
         with open('/proc/mounts') as proc_mounts:
             mounted_fs_info = proc_mounts.read().replace('\n',' ')
-            mounted_file_systems_options = [filesystem.upper() + '_FS' for filesystem in possible_file_systems if ' ' + filesystem + ' ' in mounted_fs_info]
+            mounted_file_systems_options = ['CONFIG_' + filesystem.upper() + '_FS' for filesystem in possible_file_systems if ' ' + filesystem + ' ' in mounted_fs_info]
             return(mounted_file_systems_options)
     else:
         print('/proc/mounts was not found. File system kernel options can not be added.')
